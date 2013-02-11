@@ -42,9 +42,10 @@ sub comp {
     return $count{$b} <=> $count{$a} || $a cmp $b;
 }
 
-# Valid email domains sorted by count, or else by name
+# Sort by count, or else by name, '' to the end
 my @sorted = sort comp grep { length $_ } keys %count;
+push @sorted, '' if exists $count{''};
 
 # And print result for valid emails, then for invalid
-say length $_ ? $_ : 'INVALID', "\t", $count{$_} for @{[ @sorted, '' ]};
+say length $_ ? $_ : 'INVALID', "\t", $count{$_} for @sorted;
 
