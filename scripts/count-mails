@@ -1,24 +1,31 @@
 #!/usr/bin/perl
 
 use Modern::Perl;
+use encoding ':locale';
 
-use Email::Address;
-use Regexp::Common qw{Email::Address};
+my $addr_spec = do {
+   use Regexp::Grammars;
+   qr{
+<address>
 
+<token: address>       <local_part> \@ <domain>
+
+<token: local_part>	<.atext>+ (?: \. <.atext>+)*
+<token: atext>		\p{Alnum} | [!#\$%&'*+-/=?^_`{|}~]
+
+<token: domain>		<.label> (?: \. <.label> )*
+<token: label>		\p{Alpha} (?: (?:<.ALNUM> | -)* <.ALNUM>)?
+<token: ALNUM>		\p{Alnum}
+   }x;
+
+};
 
 
 sub addr_host {
-  my ($addr) = @_;
-
-  # Check if whole string is email first
-  # (Email::Address will happily take email from the middle)
-  my $ere = $RE{Email}{Address};
-  $addr =~ /^ $ere $/x or return undef;
-
-  my ($parsed) = Email::Address->parse($addr);
-  return $parsed->host;
+    my ($addr) = @_;
+    $addr =~ /^ $addr_spec $/x or return undef;
+    return $/{address}{domain};
 }
-
 
 
 local $/ = undef;
