@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 use Modern::Perl;
-use Test::Simple;
+use Test::More qw{no_plan};
 use IPC::Run3;
 
 my %emails;
@@ -14,17 +14,12 @@ while (<$data>) {
 
 
 while (my ($email, $valid) = each %emails) {
-    #say $email;
-
     my $in = [$email];
     my $out;
     run3 ['scripts/count-mails'], $in, \$out;
 
     my $v = $out !~ /INVALID/;
 
-    if ($valid xor $v) {
-	say "$email fuck ", "[$valid]", "[$v]", ($valid xor $v) and die '';
-    }
+    ok(! $valid == $out =~ /INVALID/, "email $email");
 }
-
 
