@@ -21,7 +21,7 @@ my $addr_spec = do {
 };
 
 
-sub addr_host {
+sub addr_domain {
     my ($addr) = @_;
     $addr =~ /^ $addr_spec $/x or return undef;
     return $/{address}{domain};
@@ -31,12 +31,20 @@ sub addr_host {
 local $/ = undef;
 my $in = <>;
 
-my @hosts = map { addr_host($_) // '' } split /\n/, $in;
+# Domain names, '' for invalid emails
+my @domains = map { addr_domain($_) // '' } split /\n/, $in;
 
+# Count them
 my %count = ();
-$count{$_}++ for @hosts;
+$count{$_}++ for @domains;
 
-my @sorted = sort { length $a or $count{$a} <=> $count{$b} } keys %count;
+sub comp {
+    return $count{$b} <=> $count{$a} || $a cmp $b;
+}
 
-say length $_ ? $_ : 'INVALID', "\t", $count{$_} for @sorted;
+# Valid email domains sorted by count, or else by name
+my @sorted = sort comp grep { length $_ } keys %count;
+
+# And print result for valid emails, then for invalid
+say length $_ ? $_ : 'INVALID', "\t", $count{$_} for @{[ @sorted, '' ]};
 
