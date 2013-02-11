@@ -1,0 +1,35 @@
+#!/usr/bin/perl
+
+use Modern::Perl;
+
+use Email::Address;
+use Regexp::Common qw{Email::Address};
+
+
+
+sub addr_host {
+  my ($addr) = @_;
+
+  # Check if whole string is email first
+  # (Email::Address will happily take email from the middle)
+  my $ere = $RE{Email}{Address};
+  $addr =~ /^ $ere $/x or return undef;
+
+  my ($parsed) = Email::Address->parse($addr);
+  return $parsed->host;
+}
+
+
+
+local $/ = undef;
+my $in = <>;
+
+my @hosts = map { addr_host($_) // '' } split /\n/, $in;
+
+my %count = ();
+$count{$_}++ for @hosts;
+
+my @sorted = sort { length $a or $count{$a} <=> $count{$b} } keys %count;
+
+say length $_ ? $_ : 'INVALID', "\t", $count{$_} for @sorted;
+
