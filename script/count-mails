@@ -5,6 +5,8 @@ use encoding ':locale';
 
 our $VERSION = '-0.0.0';
 
+# There was a thing called Email::Address but !@#$ was valid for it.
+# This will do it instead
 my $addr_spec = do {
    use Regexp::Grammars;
    qr{
