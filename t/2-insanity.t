@@ -97,3 +97,19 @@ foreach my $test (1..20) {
     }
 }
 
+
+# Self check
+ok(prop_sorted([], {}, $_->[0]) == $_->[1], "self-check prop_sorted")
+    for ([ [], 1 ],
+	 [ [['a@b',0]], 1 ],
+	 [ [['a@b',0],['INVALID',0]], 1 ],
+	 [ [['a@b',0],['INVALID',0],['zzz',0]], 0 ],
+	 [ [['a@x',1],['b@x',0]], 1 ]);
+
+
+ok(prop_count($_->[0], {}, $_->[1]) == $_->[2], 'self-check prop_count')
+    for ([ [], [], 1],
+	 [ [qw{a}], [[a=>1]], 1 ],
+	 [ [qw{a b}], [[a=>1],[b=>1]], 1 ],
+	 [ [qw{a b c}], [[x=>2]], 0 ]);
+
