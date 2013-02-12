@@ -25,7 +25,7 @@ my $addr_spec = do {
 
 sub addr_domain {
     my ($addr) = @_;
-    $addr =~ /^ $addr_spec $/x or return undef;
+    $addr =~ /^ $addr_spec $/x or return;
     return $/{address}{domain};
 }
 
