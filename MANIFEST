@@ -15,6 +15,8 @@ t/data/data-3.in
 t/data/data-3.out
 t/data/data-uni.in
 t/data/data-uni.out
+t/data/data-v.in
+t/data/data-v.out
 t/data/emails-validated
 t/data/perlcriticrc
 t/manifest.t
