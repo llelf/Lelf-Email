@@ -71,7 +71,7 @@ sub arbitrary_addr {
 }
 
 
-foreach my $test (1..10) {
+foreach my $test (1..20) {
     my %emails = ();
 
     for (0 .. rand 50) {
