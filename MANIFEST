@@ -2,8 +2,8 @@ Build.PL
 MANIFEST			This list of files
 README
 script/count-mails
-t/0-predef-singles.t
-t/1-predef-many.t
+t/0-parsing.t
+t/1-predefs.t
 t/2-insanity.t
 t/data/data-0.in
 t/data/data-0.out
