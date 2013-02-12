@@ -12,9 +12,10 @@ use String::Random;
 sub prop_sorted {
     my (undef, undef, $out) = @_;
 
-    $out->[$_-1][1] >= $out->[$_][1] or $out->[$_][0] eq 'INVALID'
-	or return 0
-	for (1 .. $#$out);
+    for (1 .. $#$out) {
+	return 0 unless ($out->[$_][0] eq 'INVALID'
+			 or $out->[$_-1][0] ne 'INVALID' and $out->[$_-1][1] >= $out->[$_][1]);
+    }
 
     return 1;
 }
