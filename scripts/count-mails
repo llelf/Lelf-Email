@@ -3,6 +3,8 @@
 use Modern::Perl;
 use encoding ':locale';
 
+our $VERSION = '-0.0.0';
+
 my $addr_spec = do {
    use Regexp::Grammars;
    qr{
