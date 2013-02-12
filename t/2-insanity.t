@@ -47,7 +47,7 @@ my %props = (prop_sorted => \&prop_sorted,
 
 
 
-# Don't read below
+# Don't read anything below
 
 my $rand = String::Random->new;
 $rand->{X} = [ 'a'..'z', '+.' ];
@@ -61,6 +61,8 @@ sub arbitrary_addr {
 
     my $email = join '@', ($loc, $dom);
 
+    # At this point $email is valid.
+    # Now maybe mutate it a bit
     if (int rand 2) {
 	my $i = rand length $email;
 	my @r = split '', '@.!';
