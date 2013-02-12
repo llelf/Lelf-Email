@@ -16,10 +16,13 @@ my $builder = Module::Build->new(
     },
     build_requires => {
         'Test::More' => 0,
+	'IPC::Run3' => 0,
+	'Test::Perl::Critic' => 0,
+	'String::Random' => 0,
     },
     requires => {
 	'Modern::Perl' => 0,
-	'Email::Address' => 0,
+	'Regexp::Grammars' => 0,
     },
     add_to_cleanup     => [ 'Lelf-Email-*' ],
     create_makefile_pl => 'traditional',
