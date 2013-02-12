@@ -13,6 +13,8 @@ t/data/data-2.in
 t/data/data-2.out
 t/data/data-3.in
 t/data/data-3.out
+t/data/data-uc.in
+t/data/data-uc.out
 t/data/data-uni.in
 t/data/data-uni.out
 t/data/data-v.in
