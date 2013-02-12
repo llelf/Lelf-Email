@@ -22,7 +22,7 @@ sub prop_sorted {
 
 # Sum of counts in output = input addrs count
 sub prop_count {
-    my ($in, $valid, $out) = @_;
+    my ($in, undef, $out) = @_;
 
     my $out_count = 0;
     $out_count += $_->[1] for @$out;
@@ -90,7 +90,10 @@ foreach my $test (1..10) {
     my @out = map { [ split /\t/, $_ ] } split "\n", $txt_out;
     
     for my $p (keys %props) {
-	ok($props{$p}->([keys %emails], \%emails, \@out), "test $test: $p");
+	ok($props{$p}->([keys %emails],
+			\%emails,
+			\@out),
+	   "test $test: $p");
     }
 }
 
