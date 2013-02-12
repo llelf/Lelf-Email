@@ -1,5 +1,5 @@
 # Globals
-# severity = 5
+severity = 4
 # force = 0
 # only = 0
 # allow-unsafe = 0
@@ -9,7 +9,7 @@
 # top = 0
 # verbose = 4
 # include = 
-# exclude = 
+exclude = TestingAndDebugging::RequireUseStrict TestingAndDebugging::RequireUseWarnings
 # single-policy = 
 # theme = 
 # color-severity-highest = bold red
