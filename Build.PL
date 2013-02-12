@@ -4,10 +4,12 @@ use warnings FATAL => 'all';
 use Module::Build;
 
 my $builder = Module::Build->new(
-    module_name         => 'Lelf::Email',
-    license             => 'Artistic_2_0',
+    dist_name => 'Lelf-Email',
+    script_files => 'scripts/count-mails',
+    dist_abstract => 'email counting',
+    license             => 'BSD',
     dist_author         => q{Anton Nikishaev <me@lelf.tk>},
-    dist_version_from   => 'lib/Lelf/Email.pm',
+    dist_version_from => 'scripts/count-mails',
     release_status      => 'stable',
     configure_requires => {
         'Module::Build' => 0,
