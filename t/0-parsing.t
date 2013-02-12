@@ -18,8 +18,6 @@ while (my ($email, $valid) = each %emails) {
     my $out;
     run3 ['script/count-mails'], $in, \$out;
 
-    my $v = $out !~ /INVALID/;
-
     ok(! $valid == $out =~ /INVALID/, "email $email");
 }
 
