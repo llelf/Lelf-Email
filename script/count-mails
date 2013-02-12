@@ -15,11 +15,12 @@ my $addr_spec = do {
 <token: address>       <local_part> \@ <domain>
 
 <token: local_part>	<.atext>+ (?: \. <.atext>+)*
-<token: atext>		\p{Alnum} | [!#\$%&'*+\-/=?^_`{|}~]
+<token: atext>		<.ALNUM> | [!#\$%&'*+\-/=?^_`{|}~]
 
 <token: domain>		<.label> (?: \. <.label> )*
-<token: label>		\p{Alpha} (?: (?:<.ALNUM> | -)* <.ALNUM>)?
-<token: ALNUM>		\p{Alnum}
+<token: label>		<.ALPHA> (?: (?:<.ALNUM> | -)* <.ALNUM>)?
+<token: ALNUM>		(?=\p{Alnum}) \X
+<token: ALPHA>		(?=\p{Alpha}) \X
    }x;
 
 };
