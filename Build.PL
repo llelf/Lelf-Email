@@ -5,11 +5,11 @@ use Module::Build;
 
 my $builder = Module::Build->new(
     dist_name => 'Lelf-Email',
-    script_files => 'scripts/count-mails',
+    script_files => 'script/count-mails',
     dist_abstract => 'email counting',
     license             => 'bsd',
     dist_author         => q{Anton Nikishaev <me@lelf.tk>},
-    dist_version_from => 'scripts/count-mails',
+    dist_version_from => 'script/count-mails',
     release_status      => 'stable',
     configure_requires => {
         'Module::Build' => 0,

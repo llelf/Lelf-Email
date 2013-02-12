@@ -7,7 +7,7 @@ use IPC::Run3;
 foreach my $file_in (<t/data/data*.in>) {
     (my $file_out = $file_in) =~ s{\.in}{\.out};
 
-    run3 ['scripts/count-mails'], $file_in, \my $out;
+    run3 ['script/count-mails'], $file_in, \my $out;
 
     open(my $o, $file_out);
 

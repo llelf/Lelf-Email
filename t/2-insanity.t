@@ -78,13 +78,13 @@ foreach my $test (1..10) {
 
 	# Now assume address parsing works right and script gives
 	# right result for one address
-	run3 ['scripts/count-mails'], \$email, \my $out;
+	run3 ['script/count-mails'], \$email, \my $out;
 	my $valid = $out !~ /INVALID/;
 	$emails{$email} = $valid;
     }
 
     my $txt_in = join "\n", keys %emails;
-    run3 ['scripts/count-mails'], \$txt_in, \my $txt_out;
+    run3 ['script/count-mails'], \$txt_in, \my $txt_out;
 
     my @out = map { [ split /\t/, $_ ] } split "\n", $txt_out;
     

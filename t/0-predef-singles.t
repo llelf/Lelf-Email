@@ -16,7 +16,7 @@ while (<$data>) {
 while (my ($email, $valid) = each %emails) {
     my $in = [$email];
     my $out;
-    run3 ['scripts/count-mails'], $in, \$out;
+    run3 ['script/count-mails'], $in, \$out;
 
     my $v = $out !~ /INVALID/;
 
