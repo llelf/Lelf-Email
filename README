@@ -1,15 +1,55 @@
 Lelf-Email
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+reg.ru's test task (https://www.reg.ru/company/jobs/testtask-prog)
 
-A README file is required for CPAN modules since CPAN extracts the README
-file from a module distribution so that people browsing the archive
-can use it to get an idea of the module's uses. It is usually a good idea
-to provide version information here so that people can decide whether
-fixes for the module are worth downloading.
+
+
+Задание 2 — «E-mail domains» + тесты
+
+Создать утилиту командной строки, которая обрабатывает данные
+способом, описанным ниже, и возвращает результат в STDOUT.
+
+ВХОДНЫЕ ДАННЫЕ:
+
+В командной строке указывается имя текстового файла. Текстовый файл с
+email-адресами (разделитель — перевод строки). Пример:
+
+info@mail.ru
+support@vk.com
+ddd@rambler.ru
+roxette@mail.ru
+sdfsdf@@@@@rdfdf
+example@localhost
+иван@иванов.рф
+ivan@xn--c1ad6a.xn--p1ai
+
+СУТЬ ОБРАБОТКИ:
+
+Группировка адресов по имени домена, подсчёт email-адресов для каждого домена.
+
+ВЫХОДНЫЕ ДАННЫЕ:
+
+Имена доменов и количество адресов в каждом домене. Сортировка по
+количеству адресов в домене, по убыванию. Отдельной строкой —
+количество невалидных адресов. Пример:
+
+mail.ru	2
+vk.com	1
+rambler.ru	1
+INVALID	1
+
+Созданная программа, должна быть максимально покрыта автоматическими
+тестами (юнит тесты и т. п.), валидирующими все аспекты
+функционирования программы и покрывающими максимальное количество кода
+программы.
+
+Несмотря на игрушечный пример оценивается качество кода, его
+форматирование (пробелы, отступы, пустые строки, выделение смысловых
+блоков и т.п.), модульность, соответствие «лучшим практикам»
+Perl-программирования и, главное, способности писать автотесты.
+
+
+
 
 
 INSTALLATION
@@ -20,27 +60,6 @@ To install this module, run the following commands:
 	./Build
 	./Build test
 	./Build install
-
-SUPPORT AND DOCUMENTATION
-
-After installing, you can find documentation for this module with the
-perldoc command.
-
-    perldoc Lelf::Email
-
-You can also look for information at:
-
-    RT, CPAN's request tracker (report bugs here)
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Lelf-Email
-
-    AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/Lelf-Email
-
-    CPAN Ratings
-        http://cpanratings.perl.org/d/Lelf-Email
-
-    Search CPAN
-        http://search.cpan.org/dist/Lelf-Email/
 
 
 LICENSE AND COPYRIGHT
