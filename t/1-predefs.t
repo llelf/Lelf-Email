@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+# Use predefined tests (data/data*.{in,out})
+
 use Modern::Perl;
 use Test::More qw{no_plan};
 use IPC::Run3;

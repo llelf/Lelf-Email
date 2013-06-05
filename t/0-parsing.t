@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+# Addr parsing. Tests in data/emails-validated
+
 use Modern::Perl;
 use Test::More qw{no_plan};
 use IPC::Run3;

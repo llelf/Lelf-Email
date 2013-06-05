@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# You wanted 'automatic' tests
+# You wanted 'automatic' tests?
 
 use Modern::Perl;
 use Test::More qw{no_plan};
@@ -13,6 +13,8 @@ sub prop_sorted {
     my (undef, undef, $out) = @_;
 
     for (1 .. $#$out) {
+	# This is not strictly true, but ok for us
+	# (INVALID can be from test@INVALID)
 	return 0 unless ($out->[$_][0] eq 'INVALID'
 			 or $out->[$_-1][0] ne 'INVALID' and $out->[$_-1][1] >= $out->[$_][1]);
     }
@@ -47,7 +49,7 @@ my %props = (prop_sorted => \&prop_sorted,
 
 
 
-# Don't read anything below
+# Feel dirty
 
 my $rand = String::Random->new;
 $rand->{X} = [ 'a'..'z', '+.' ];
@@ -79,8 +81,8 @@ foreach my $test (1..20) {
     for (0 .. rand 50) {
 	my $email = arbitrary_addr;
 
-	# Now assume address parsing works right and script gives
-	# right result for one address
+	# Now assume address parsing correctly works and script gives
+	# us right result for one address
 	run3 ['script/count-mails'], \$email, \my $out;
 	my $valid = $out !~ /INVALID/;
 	$emails{$email} = $valid;
