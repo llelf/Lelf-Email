@@ -33,7 +33,7 @@ sub addr_domain {
 }
 
 
-local $/ = undef;
+local undef $/;
 my $in = <>;
 
 # Domain names, '' for invalid emails
@@ -52,5 +52,8 @@ my @sorted = sort comp grep { length $_ } keys %count;
 push @sorted, '' if exists $count{''};
 
 # And print result for valid emails, then for invalid
-say length $_ ? $_ : 'INVALID', "\t", $count{$_} for @sorted;
+for my $e (@sorted) {
+    say length $e ? $e : 'INVALID', "\t", $count{$e};
+}
+
 
