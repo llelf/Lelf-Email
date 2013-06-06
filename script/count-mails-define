@@ -1,0 +1,54 @@
+#!/usr/bin/env perl
+
+use Modern::Perl;
+use open ':locale';
+
+our $VERSION = '-0.0.0';
+
+# There was a thing called Email::Address but !@#$ was valid for it.
+# This will do it instead
+my $addr_spec = qr{
+ (?P>local_part) \@ (?<Domain> (?P>domain))
+    (?(DEFINE)
+     (?<local_part>	(?P>atext)+ (?: \. (?P>atext)+)*)
+     (?<atext>		(?P>ALNUM) | [!\#\$%&\'*+\-/=?^_\`{|}~])
+
+     (?<domain>		(?P>label) (?: \. (?P>label))*)
+     (?<label>		(?P>ALPHA) (?: (?: (?P>ALNUM) | -)* (?P>ALNUM))?)
+     (?<ALNUM>		(?=\p{Alnum}) \X)
+     (?<ALPHA>		(?=\p{Alpha}) \X))
+}x;
+
+
+
+sub addr_domain {
+    my ($addr) = @_;
+    $addr =~ /^ $addr_spec $/x or return;
+    return $+{Domain};
+}
+
+
+local undef $/;
+my $in = <>;
+
+# Domain names, '' for invalid emails
+my @domains = map { addr_domain($_) // '' } split /\n/, $in;
+
+# Count them
+my %count = ();
+$count{$_}++ for @domains;
+
+sub comp {
+    return $count{$b} <=> $count{$a} || $a cmp $b;
+}
+
+# Sort by count, or else by name, '' to the end
+my @sorted = sort comp grep { length $_ } keys %count;
+push @sorted, '' if exists $count{''};
+
+# And print result for valid emails, then for invalid
+for my $e (@sorted) {
+    say length $e ? $e : 'INVALID', "\t", $count{$e};
+}
+
+
