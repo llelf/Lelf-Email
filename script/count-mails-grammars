@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 use Modern::Perl;
-use encoding ':locale';
+use open ':locale';
 
 our $VERSION = '-0.0.0';
 
